@@ -20,9 +20,10 @@ jobs:
           sudo cmake -S /usr/src/gtest -B /usr/src/gtest/build
           sudo cmake --build /usr/src/gtest/build
           sudo cp /usr/src/gtest/build/lib/*.a /usr/lib
+      
+      - name: Build tests
+        run: g++ -std=c++17 -Wall tests/test_sum.cpp -lgtest -lgtest_main -pthread -o test_sum
 
-      #- name: Run clang-tidy
-      #  run: clang-tidy main.cpp -- -std=c++17
-
-      #- name: Run clang-format check
-      #  run: clang-format --dry-run --Werror main.cpp
+      - name: Run tests
+        run: ./test_sum
+        
